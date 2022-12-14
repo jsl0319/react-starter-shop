@@ -1,5 +1,6 @@
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
 import shoes from './data/shoes';
+import { Routes, Route, Link } from 'react-router-dom'
 
 function App() {
   return (
@@ -14,15 +15,12 @@ function App() {
               <Nav.Link href="#features">Features</Nav.Link>
               <Nav.Link href="#pricing">Pricing</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
+                <Link to='/'>Home</Link>
+                <br></br>
+                <Link to='/detail'>Detail</Link>
                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Nav>
@@ -35,22 +33,31 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className='main-bg'></div>
-
-      <Container>
-        <Row>
-          {
-            shoes.map((s, i) => <Item key={i} shoes={shoes[i]} index={i}></Item>)
-          }
-        </Row>
-      </Container>
-
+      <Routes>
+        <Route path='/' element={ <Main/> }/>
+        <Route path='/detail' element={ <Detail/> }/>
+      </Routes>
     </div>
   );
 }
 
-const Item = (props) => {
-  const altStr = `shoes${props.index + 1}`;
+const Main = () => {
+  return(
+      <>
+        <div className='main-bg'></div>
+        <Container>
+          <Row>
+            {
+              shoes.map((s, i) => <Card key={i} shoes={shoes[i]} i={i}></Card>)
+            }
+          </Row>
+        </Container>
+      </>
+  )
+}
+
+const Card = (props) => {
+  const altStr = `shoes${props.i + 1}`;
   const imgSrc = `https://codingapple1.github.io/shop/${altStr}.jpg`;
 
   return (
@@ -61,6 +68,24 @@ const Item = (props) => {
         <p>{ props.shoes.description }</p>
         <p>{ props.shoes.price }</p>
       </Col>
+  )
+}
+
+const Detail = () => {
+  return(
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" alt='shoes1' width="100%" />
+        </div>
+        <div className="col-md-6">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button> 
+        </div>
+      </div>
+    </div> 
   )
 }
 
