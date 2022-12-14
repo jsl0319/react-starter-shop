@@ -1,6 +1,7 @@
-import { Col, Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
-import shoes from './data/shoes';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Routes, Route, Link } from 'react-router-dom'
+import Main from './components/Main'
+import Detail from './components/Detail'
 
 function App() {
   return (
@@ -41,52 +42,5 @@ function App() {
   );
 }
 
-const Main = () => {
-  return(
-      <>
-        <div className='main-bg'></div>
-        <Container>
-          <Row>
-            {
-              shoes.map((s, i) => <Card key={i} shoes={shoes[i]} i={i}></Card>)
-            }
-          </Row>
-        </Container>
-      </>
-  )
-}
-
-const Card = (props) => {
-  const altStr = `shoes${props.i + 1}`;
-  const imgSrc = `https://codingapple1.github.io/shop/${altStr}.jpg`;
-
-  return (
-      <Col xs>
-        <img src={ imgSrc } alt='shoes1' width='80%'/>
-        <h4>{ props.shoes.name }</h4>
-        <p>{ props.shoes.brand }</p>
-        <p>{ props.shoes.description }</p>
-        <p>{ props.shoes.price }</p>
-      </Col>
-  )
-}
-
-const Detail = () => {
-  return(
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" alt='shoes1' width="100%" />
-        </div>
-        <div className="col-md-6">
-          <h4 className="pt-5">상품명</h4>
-          <p>상품설명</p>
-          <p>120000원</p>
-          <button className="btn btn-danger">주문하기</button> 
-        </div>
-      </div>
-    </div> 
-  )
-}
 
 export default App;
